@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.4</version>
+		<version>3.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
 	<groupId>ca.footeware.rest</groupId>
 	<artifactId>petclinic</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	
 	<name>Petclinic</name>
 	<description>Rest service for Petclinic ng app.</description>
