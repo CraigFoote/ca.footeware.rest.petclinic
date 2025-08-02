@@ -12,7 +12,7 @@
 	
 	<groupId>ca.footeware.rest</groupId>
 	<artifactId>petclinic</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.2.0-SNAPSHOT</version>
 	
 	<name>Petclinic</name>
 	<description>Rest service for Petclinic ng app.</description>
@@ -50,7 +50,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -61,6 +60,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.testcontainers</groupId>
+		    <artifactId>junit-jupiter</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.testcontainers</groupId>
+		    <artifactId>testcontainers</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.testcontainers</groupId>
+    		<artifactId>mongodb</artifactId>
+    		<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>

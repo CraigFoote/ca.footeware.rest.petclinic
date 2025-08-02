@@ -3,8 +3,10 @@
  */
 package ca.footeware.rest.petclinic.controllers;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,5 +61,11 @@ public class VetController {
 			Vet saved = vetRepository.save(existingVet);
 			return ResponseEntity.ok(saved);
 		}).orElse(ResponseEntity.notFound().build());
+	}
+	
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<?> deleteVet(@PathVariable String id){
+		vetRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatusCode.valueOf(200));
 	}
 }
