@@ -38,10 +38,10 @@ public class WebSecurityConfig {
 	 */
 	@Bean
 	SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		http.cors(withDefaults()).csrf((csrf) -> csrf.disable())
-				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		http.cors(withDefaults()).csrf(csrf -> csrf.disable())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/**").hasRole("USER").anyRequest().authenticated())
+		http.authorizeHttpRequests(requests -> requests.requestMatchers("/**").hasRole("USER").anyRequest().authenticated())
 				.httpBasic(withDefaults());
 		
 		return http.build();

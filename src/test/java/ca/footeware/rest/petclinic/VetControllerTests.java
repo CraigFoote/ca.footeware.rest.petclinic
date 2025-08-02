@@ -42,11 +42,8 @@ class VetControllerTests {
 		registry.add("spring.data.mongodb.port", mongoContainer::getFirstMappedPort);
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@BeforeEach
-	void setUpBeforeEach() throws Exception {
+	void setUpBeforeEach() {
 		assertTrue(mongoContainer.isRunning());
 		assertNotNull(vetRepository);
 		vetController = new VetController(vetRepository);
