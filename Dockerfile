@@ -1,4 +1,4 @@
-FROM eclipse-temurin:24.0.1_9-jre
+FROM eclipse-temurin:25-jre
 ARG JAR_FILE
 ARG JAR_NAME
 ADD ${JAR_FILE} /opt/rest.petclinic/${JAR_NAME}
