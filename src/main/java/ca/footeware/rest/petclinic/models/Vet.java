@@ -69,5 +69,4 @@ public class Vet {
 		Vet other = (Vet) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

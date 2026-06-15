@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.footeware.rest.petclinic.models.Vet;
 import ca.footeware.rest.petclinic.repositories.VetRepository;
+import ca.footeware.rest.petclinic.services.VetService;
 
 /**
  * Provides RESTful endpoints for managing vets.
@@ -25,47 +26,47 @@ import ca.footeware.rest.petclinic.repositories.VetRepository;
 @RequestMapping("/vets")
 public class VetController {
 
-	private VetRepository vetRepository;
+	private VetService vetService;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param vetRepository {@link VetRepository}
+	 * @param VetService {@link VetService}
 	 */
-	public VetController(VetRepository vetRepository) {
-		this.vetRepository = vetRepository;
+	public VetController(VetService vetService) {
+		this.vetService = vetService;
 	}
 
 	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Vet> createVet(@RequestBody Vet vet) {
-		Vet saved = vetRepository.save(vet);
+		Vet saved = vetService.save(vet);
 		return ResponseEntity.ok(saved);
 	}
 
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Iterable<Vet>> getAllVets() {
-		Iterable<Vet> vets = vetRepository.findAll();
+		Iterable<Vet> vets = vetService.findAll();
 		return ResponseEntity.ok(vets);
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Vet> getVet(@PathVariable String id) {
-		return vetRepository.findById(id).map(vet -> ResponseEntity.ok(vet)).orElse(ResponseEntity.notFound().build());
+		return vetService.findById(id).map(vet -> ResponseEntity.ok(vet)).orElse(ResponseEntity.notFound().build());
 	}
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Vet> updateVet(@PathVariable String id, @RequestBody Vet vet) {
-		return vetRepository.findById(id).map(existingVet -> {
+		return vetService.findById(id).map(existingVet -> {
 			existingVet.setFirstName(vet.getFirstName());
 			existingVet.setLastName(vet.getLastName());
-			Vet saved = vetRepository.save(existingVet);
+			Vet saved = vetService.save(existingVet);
 			return ResponseEntity.ok(saved);
 		}).orElse(ResponseEntity.notFound().build());
 	}
-	
-	@DeleteMapping(value="/{id}")
-	public ResponseEntity<?> deleteVet(@PathVariable String id){
-		vetRepository.deleteById(id);
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<?> deleteVet(@PathVariable String id) {
+		vetService.deleteById(id);
 		return new ResponseEntity<>(HttpStatusCode.valueOf(200));
 	}
 }

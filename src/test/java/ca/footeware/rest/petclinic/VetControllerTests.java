@@ -21,7 +21,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ca.footeware.rest.petclinic.controllers.VetController;
 import ca.footeware.rest.petclinic.models.Vet;
-import ca.footeware.rest.petclinic.repositories.VetRepository;
+import ca.footeware.rest.petclinic.services.VetService;
 
 @SpringBootTest
 @Testcontainers
@@ -30,7 +30,7 @@ class VetControllerTests {
 	private static VetController vetController;
 
 	@Autowired
-	private VetRepository vetRepository;
+	private VetService vetService;
 
 	@Container
 	static MongoDBContainer mongoContainer = new MongoDBContainer("mongo:8.0");
@@ -38,15 +38,15 @@ class VetControllerTests {
 	@DynamicPropertySource
 	static void containersProperties(DynamicPropertyRegistry registry) {
 		mongoContainer.start();
-		registry.add("spring.data.mongodb.host", mongoContainer::getHost);
-		registry.add("spring.data.mongodb.port", mongoContainer::getFirstMappedPort);
+		registry.add("spring.mongodb.host", mongoContainer::getHost);
+		registry.add("spring.mongodb.port", mongoContainer::getFirstMappedPort);
 	}
 
 	@BeforeEach
 	void setUpBeforeEach() {
 		assertTrue(mongoContainer.isRunning());
-		assertNotNull(vetRepository);
-		vetController = new VetController(vetRepository);
+		assertNotNull(vetService);
+		vetController = new VetController(vetService);
 	}
 
 	/**
